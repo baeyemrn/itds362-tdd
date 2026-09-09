@@ -41,9 +41,10 @@ def test_grams_are_not_ounces():
 
 def test_simple_addition():
     total = grams(200).plus(grams(300))
-
     converter = Converter()
-
     assert converter.reduce(total, "g") == grams(500)
+
+
+
 
 
