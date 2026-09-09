@@ -17,9 +17,13 @@ class Quantity:
         return f"Quantity({self.amount}, {self.unit!r})"
 
     def plus(self, other):
-        return Quantity(500, "g")
-
+        return Sum(self, other)
 class Converter:
     def reduce(self, expression, unit):
         return expression
+
+class Sum:
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
     
