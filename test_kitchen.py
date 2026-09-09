@@ -3,8 +3,8 @@
 # ☑ ปริมาณ​สอง​ค่าที่​มี​ทั้ง​ตัวเลข​และ​หน่วย​เท่ากัน​ถือว่า​เท่ากัน
 # ☑ 1 oz ไม่​เท่ากับ 1 g
 # ☑ 200 g + 300 g = 500 g
-# ☐ 200 g + 1 oz แปลง​ผลลัพธ์​เป็น​กรัม​โดย​ใช้​อัตรา​แปลง​หน่วย
-# ☐  (200 g + 1 oz) × 2
+# ☑ 200 g + 1 oz แปลง​ผลลัพธ์​เป็น​กรัม​โดย​ใช้​อัตรา​แปลง​หน่วย
+# ☑  (200 g + 1 oz) × 2
 
 from kitchen import Quantity,Converter
 
@@ -43,6 +43,20 @@ def test_simple_addition():
     total = grams(200).plus(grams(300))
     converter = Converter()
     assert converter.reduce(total, "g") == grams(500)
+
+def test_addition_with_conversion():
+    total = grams(200).plus(ounces(1))
+    converter = Converter()
+
+    assert converter.reduce(total, "g") == grams(228.35)
+
+
+def test_sum_times():
+    total = grams(200).plus(ounces(1)).times(2)
+    converter = Converter()
+
+    assert converter.reduce(total, "g") == grams(456.7)
+
 
 
 
